@@ -1,6 +1,7 @@
 package com.example.foodiefood
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -42,6 +43,8 @@ class SecondFragment : Fragment() {
         backButton.setOnClickListener {
             handleGoBack(it)
         }
+
+        Log.i("test", "inside onActivityCreated in second fragment")
     }
 
     companion object {

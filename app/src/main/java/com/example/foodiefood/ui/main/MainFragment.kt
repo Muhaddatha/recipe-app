@@ -36,7 +36,10 @@ class MainFragment : Fragment() {
 
     private fun handleGetRecipe(view : View){
         Log.i("test", "inside handleGetRecipe function in main fragment")
-        (activity as MainActivity).changeFragment(id, "mainFragment")
+
+        var url = "https://api.spoonacular.com/recipes/random?number=1&tags=korean&apiKey="
+        (activity as MainActivity).apiCall(url, this.id)
+
     }
 
 }
