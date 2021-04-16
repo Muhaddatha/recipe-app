@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_second.*
 import org.json.JSONObject
 
@@ -45,6 +46,12 @@ class SecondFragment : Fragment() {
 
         resp = (activity as MainActivity).resp
         textView.text = resp.toString()
+
+        //update imageview
+        var url : String? = resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("image").toString()
+        Log.i("test", "imageView url: $url")
+        Picasso.get().load(url).into(imageView)
+
         backButton.setOnClickListener {
             handleGoBack(it)
         }
