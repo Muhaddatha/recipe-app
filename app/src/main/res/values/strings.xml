@@ -2,4 +2,32 @@
     <string name="app_name">Foodie Food</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="dietOptions">
+        <item>Diet options</item>
+        <item>gluten-free</item>
+        <item>ketogenic</item>
+        <item>vegetarian</item>
+        <item>lacto-vegetarian</item>
+        <item>ovo-vegetarian</item>
+        <item>vegan</item>
+        <item>pescetarian</item>
+        <item>paleo</item>
+        <item>primal</item>
+        <item>whole30</item>
+    </string-array>
+
+    <string-array name="cuisineOptions">
+        <item>african</item>
+        <item>american</item>
+        <item>british</item>
+        <item>cajun</item>
+        <item></item>
+    </string-array>
+
+    <string-array name="mealTypeOptions">
+        <item>main-course</item>
+        <item>side-dish</item>
+        <item>dessert</item>
+    </string-array>
 </resources>
