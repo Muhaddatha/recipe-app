@@ -39,12 +39,14 @@ class SecondFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        Log.i("test", "inside onActivityCreated in second fragment")
+
+        textView.text = (activity as MainActivity).resp.toString()
 
         backButton.setOnClickListener {
             handleGoBack(it)
         }
 
-        Log.i("test", "inside onActivityCreated in second fragment")
     }
 
     companion object {
