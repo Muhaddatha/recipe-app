@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_second.*
+import org.json.JSONArray
 import org.json.JSONObject
 
 // TODO: Rename parameter arguments, choose names that match
@@ -57,11 +58,34 @@ class SecondFragment : Fragment() {
             handleGoBack(it)
         }
 
-        recipeSummaryTextView.text = resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("title").toString() + "\nTime: " +
-                resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("readyInMinutes").toString() +
-                "\nLink: " + resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("sourceUrl").toString() + "\nServings: " +
-                resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("servings").toString() + "\nSummary: " +
+        recipeTitleTextView.text = resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("title").toString()
+
+        timeTextView.text = resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("readyInMinutes").toString() + " minutes"
+
+        servingsTextView.text = resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("servings").toString() + " serving(s)"
+
+        recipeSummaryTextView.text =
+                "Link: " + resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("sourceUrl").toString()  +
+                 "\nSummary: " +
                 Html.fromHtml(resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("summary").toString())
+
+
+        // steps textview
+        var numCurrentNum = 1
+        var stepsString: String = ""
+        var analyzedInstructionsArray : JSONArray? = resp?.getJSONArray("recipes")?.getJSONObject(0)?.getJSONArray("analyzedInstructions")
+
+        analyzedInstructionsArray.let{
+            for(i in 0 until analyzedInstructionsArray!!.length()){
+                for(j in 0 until analyzedInstructionsArray?.getJSONObject(i).getJSONArray("steps").length()){
+                    stepsString += "Step $numCurrentNum: " + analyzedInstructionsArray?.getJSONObject(i).getJSONArray("steps").getJSONObject(j).getString("step").toString() + "\n"
+                    numCurrentNum++
+                }
+
+            }
+        }
+
+        stepsTextView.text = stepsString
 
     }
 
