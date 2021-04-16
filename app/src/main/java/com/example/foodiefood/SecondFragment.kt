@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_second.*
+import org.json.JSONObject
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +23,7 @@ class SecondFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private var resp : JSONObject? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,8 +43,8 @@ class SecondFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         Log.i("test", "inside onActivityCreated in second fragment")
 
-        textView.text = (activity as MainActivity).resp.toString()
-
+        resp = (activity as MainActivity).resp
+        textView.text = resp.toString()
         backButton.setOnClickListener {
             handleGoBack(it)
         }
