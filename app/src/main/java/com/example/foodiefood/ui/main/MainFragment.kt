@@ -8,13 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.CheckBox
 import com.example.foodiefood.MainActivity
 import com.example.foodiefood.R
 import kotlinx.android.synthetic.main.main_fragment.*
 
 class MainFragment : Fragment() {
 
-    //lateinit var adapterArray : ArrayAdapter<String>
+    var tagOptions: String = ""
+    private lateinit var checkboxes: List<CheckBox>
 
     companion object {
         fun newInstance() = MainFragment()
@@ -31,11 +33,15 @@ class MainFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
+
+        //initialize checkbox array
+        checkboxes = listOf<CheckBox>(dairyCheckbox,eggCheckbox, glutenCheckbox, grainCheckbox, peanutCheckbox, seafoodCheckbox, sesameCheckbox, shellfishCheckbox,
+        soyCheckbox, sulfiteCheckbox, treeNutCheckbox, wheatCheckbox)
+
+
         searchButton.setOnClickListener {
             handleGetRecipe(it)
         }
-
-
 
         // setting up spinner options
         ArrayAdapter.createFromResource(activity!!.applicationContext, R.array.dietOptions, android.R.layout.simple_spinner_item).also {
@@ -55,12 +61,57 @@ class MainFragment : Fragment() {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
             mealTypeSpinner.adapter = adapter
         }
+
+        dietSpinner.selectedItem
+
     }
 
     private fun handleGetRecipe(view : View){
+        tagOptions = ""
         Log.i("test", "inside handleGetRecipe function in main fragment")
-        var url = "https://api.spoonacular.com/recipes/random?number=1&tags=korean&apiKey="
-        (activity as MainActivity).apiCall(url, this.id)
+        Log.i("test", "tagOptions before populating: " + tagOptions)
+        populateTagOptions()
+        var url = "https://api.spoonacular.com/recipes/random?number=1&tags=$tagOptions&apiKey="
+        Log.i("test", "tagOptions after populating: " + tagOptions)
+       (activity as MainActivity).apiCall(url, this.id)
+
+    }
+
+    //check all spinners and checkboxes, update tag variable
+    private fun populateTagOptions(){
+
+        if(dietSpinner.selectedItem.toString() != "Diet Options"){
+            tagOptions += dietSpinner.selectedItem.toString().toLowerCase()
+        }
+
+        if(cuisineSpinner.selectedItem.toString() != "Cuisine Options"){
+            if(tagOptions == ""){
+                tagOptions += cuisineSpinner.selectedItem.toString().toLowerCase()
+            }
+            else{
+                tagOptions += "," + cuisineSpinner.selectedItem.toString().toLowerCase()
+            }
+        }
+
+        if(mealTypeSpinner.selectedItem.toString() != "Meal Type Options"){
+            if(tagOptions == ""){
+                tagOptions += mealTypeSpinner.selectedItem.toString().toLowerCase()
+            }
+            else{
+                tagOptions += "," + mealTypeSpinner.selectedItem.toString().toLowerCase()
+            }
+        }
+
+        for(i in 0..11){
+            if(checkboxes[i].isChecked){
+                if(tagOptions == ""){
+                    tagOptions += checkboxes[i].text.toString().toLowerCase()
+                }
+                else{
+                    tagOptions += "," + checkboxes[i].text.toString().toLowerCase()
+                }
+            }
+        }
 
     }
 

@@ -19,10 +19,10 @@
 
     <string-array name="cuisineOptions">
         <item>Cuisine Options</item>
-        <item>african</item>
-        <item>american</item>
-        <item>british</item>
-        <item>cajun</item>
+        <item>African</item>
+        <item>American</item>
+        <item>British</item>
+        <item>Cajun</item>
         <item></item>
     </string-array>
 
