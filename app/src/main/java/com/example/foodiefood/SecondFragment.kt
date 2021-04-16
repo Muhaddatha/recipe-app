@@ -1,6 +1,7 @@
 package com.example.foodiefood
 
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -45,7 +46,7 @@ class SecondFragment : Fragment() {
         Log.i("test", "inside onActivityCreated in second fragment")
 
         resp = (activity as MainActivity).resp
-        textView.text = resp.toString()
+        //recipeSummaryTextView.text = resp.toString()
 
         //update imageview
         var url : String? = resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("image").toString()
@@ -55,6 +56,12 @@ class SecondFragment : Fragment() {
         backButton.setOnClickListener {
             handleGoBack(it)
         }
+
+        recipeSummaryTextView.text = resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("title").toString() + "\nTime: " +
+                resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("readyInMinutes").toString() +
+                "\nLink: " + resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("sourceUrl").toString() + "\nServings: " +
+                resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("servings").toString() + "\nSummary: " +
+                Html.fromHtml(resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("summary").toString())
 
     }
 
