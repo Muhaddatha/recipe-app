@@ -62,18 +62,25 @@ class MainFragment : Fragment() {
             mealTypeSpinner.adapter = adapter
         }
 
-        dietSpinner.selectedItem
-
     }
 
     private fun handleGetRecipe(view : View){
         tagOptions = ""
         Log.i("test", "inside handleGetRecipe function in main fragment")
-        Log.i("test", "tagOptions before populating: " + tagOptions)
+        Log.i("test", "tagOptions before populating: $tagOptions")
         populateTagOptions()
         var url = "https://api.spoonacular.com/recipes/random?number=1&tags=$tagOptions&apiKey="
-        Log.i("test", "tagOptions after populating: " + tagOptions)
-       (activity as MainActivity).apiCall(url, this.id)
+        Log.i("test", "tagOptions after populating: $tagOptions")
+        Log.i("test", "api link: $url")
+
+        if((activity as MainActivity).resp?.getJSONArray("recipes")?.length() == 0){
+            //error message
+            Log.i("test", "response returned empty array")
+        }
+        else{
+            (activity as MainActivity).apiCall(url, this.id)
+        }
+
 
     }
 
