@@ -3,6 +3,7 @@ package com.example.foodiefood
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.example.foodiefood.ui.main.MainFragment
 import com.android.volley.Request
 import com.android.volley.RequestQueue
@@ -51,7 +52,16 @@ class MainActivity : AppCompatActivity() {
                     Log.e("JSON Error", ex.toString())
                 }
 
-               changeFragment(fragmentId, "mainFragment")
+                if(resp?.getJSONArray("recipes")?.length() == 0){
+                    //error message
+                    Log.i("test", "response returned empty array")
+                    val toast = Toast.makeText(this, "No recipes found. Please try again.", Toast.LENGTH_LONG)
+                    toast.show()
+                }
+                else{
+                    changeFragment(fragmentId, "mainFragment")
+                }
+
             },
             Response.ErrorListener {
                     error ->

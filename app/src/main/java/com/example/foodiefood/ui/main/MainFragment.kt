@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.CheckBox
+import android.widget.Toast
 import com.example.foodiefood.MainActivity
 import com.example.foodiefood.R
 import kotlinx.android.synthetic.main.main_fragment.*
@@ -73,14 +74,7 @@ class MainFragment : Fragment() {
         Log.i("test", "tagOptions after populating: $tagOptions")
         Log.i("test", "api link: $url")
 
-        if((activity as MainActivity).resp?.getJSONArray("recipes")?.length() == 0){
-            //error message
-            Log.i("test", "response returned empty array")
-        }
-        else{
-            (activity as MainActivity).apiCall(url, this.id)
-        }
-
+        (activity as MainActivity).apiCall(url, this.id)
 
     }
 
