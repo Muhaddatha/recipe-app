@@ -7,21 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.MainFragment">
 
-<!--    <menu-->
-<!--        android:id="@+id/menu"-->
-<!--        android:layout_marginStart="52dp"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/dietSpinner"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        tools:context=".ui.main.MainFragment">-->
-
-<!--        <item-->
-<!--            android:id="@+id/menu_help"-->
-<!--            app:showAsAction="never"-->
-<!--            android:title="Help"></item>-->
-<!--    </menu>-->
-
     <Button
         android:id="@+id/searchButton"
         android:layout_width="wrap_content"
