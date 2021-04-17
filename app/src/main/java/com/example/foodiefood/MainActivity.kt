@@ -3,6 +3,8 @@ package com.example.foodiefood
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import com.example.foodiefood.ui.main.MainFragment
 import com.android.volley.Request
@@ -12,11 +14,31 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONException
 import org.json.JSONObject
+import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var requestQueue : RequestQueue
     var resp: JSONObject? = null
+
+    // Display menu
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    // Action when help menu item is clicked
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_help -> { // Switch previous fragment with helpFragment
+                supportFragmentManager.findFragmentByTag("mainFragment")?.let {
+                    changeFragment(it.id, "currentFragment")
+                }
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,10 +103,20 @@ class MainActivity : AppCompatActivity() {
                     .commit()
             }
             "secondFragment" -> { // Change from SecondFragment to MainFragment
+//                supportFragmentManager.beginTransaction()
+//                    .replace(prevFragmentId, MainFragment.newInstance(), "mainFragment")
+//                    .addToBackStack("null")
+//                    .commit()
+                supportFragmentManager.popBackStack()
+            }
+            "currentFragment" -> { // Change from current fragment to HelpFragment
                 supportFragmentManager.beginTransaction()
-                    .replace(prevFragmentId, MainFragment.newInstance(), "mainFragment")
+                    .replace(prevFragmentId, HelpFragment.newInstance("p1", "p2"), "helpFragment")
                     .addToBackStack("null")
                     .commit()
+            }
+            "helpFragment" -> { // Change from HelpFragment to previous fragment
+                supportFragmentManager.popBackStack()
             }
         }
     }
