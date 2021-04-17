@@ -1,7 +1,12 @@
 package com.example.foodiefood
 
+import android.content.Intent
+import android.graphics.Paint
+import android.net.Uri
 import android.os.Bundle
 import android.text.Html
+import android.text.method.LinkMovementMethod
+import android.text.method.MovementMethod
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -59,7 +64,16 @@ class SecondFragment : Fragment() {
             handleGoBack(it)
         }
 
-        recipeTitleTextView.text = resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("title").toString()
+        recipeLinkButton.text = resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("title").toString()
+
+        recipeLinkButton.setOnClickListener {
+            var dynamicUrl = resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("sourceUrl").toString()
+            val i = Intent(Intent.ACTION_VIEW)
+            i.data = Uri.parse(dynamicUrl)
+            startActivity(i)
+        }
+
+        recipeLinkButton.paintFlags = recipeLinkButton.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 
         timeTextView.text = resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("readyInMinutes").toString() + " minutes"
 
@@ -70,17 +84,15 @@ class SecondFragment : Fragment() {
         var extendedIngredientsJSONArray : JSONArray? = resp?.getJSONArray("recipes")?.getJSONObject(0)?.getJSONArray("extendedIngredients")
         extendedIngredientsJSONArray.let{
             for(i in 0 until extendedIngredientsJSONArray!!.length()){
-                //ingredientsList.add(extendedIngredientsJSONArray.getJSONObject(i).getString("originalString").toString())
                 ingredientsString += extendedIngredientsJSONArray.getJSONObject(i).getString("originalString").toString() + "\n"
             }
         }
 
+
+
         ingredientsTextView.text = ingredientsString
 
-        recipeSummaryTextView.text =
-                "Link: " + resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("sourceUrl").toString()  +
-                 "\nSummary: " +
-                Html.fromHtml(resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("summary").toString())
+        recipeSummaryTextView.text = Html.fromHtml(resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("summary").toString())
 
 
         // steps textview
@@ -99,6 +111,9 @@ class SecondFragment : Fragment() {
         }
 
         stepsTextView.text = stepsString
+
+
+
 
     }
 
@@ -125,4 +140,8 @@ class SecondFragment : Fragment() {
     private fun handleGoBack(view : View){
         (activity as MainActivity).changeFragment(id, "secondFragment")
     }
+}
+
+private operator fun MovementMethod.invoke(instance: MovementMethod?) {
+
 }
