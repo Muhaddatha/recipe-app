@@ -2,6 +2,8 @@
     <string name="app_name">Foodie Food</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="help">Help</string>
+
     <string-array name="dietOptions">
         <item>Diet Options</item>
         <item>Gluten-free</item>
