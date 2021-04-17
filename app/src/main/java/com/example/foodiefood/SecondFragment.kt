@@ -27,6 +27,7 @@ class SecondFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var resp : JSONObject? = null
+    private lateinit var ingredientsList : ArrayList<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +64,18 @@ class SecondFragment : Fragment() {
         timeTextView.text = resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("readyInMinutes").toString() + " minutes"
 
         servingsTextView.text = resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("servings").toString() + " serving(s)"
+
+        var ingredientsString: String = ""
+        // get ingredients
+        var extendedIngredientsJSONArray : JSONArray? = resp?.getJSONArray("recipes")?.getJSONObject(0)?.getJSONArray("extendedIngredients")
+        extendedIngredientsJSONArray.let{
+            for(i in 0 until extendedIngredientsJSONArray!!.length()){
+                //ingredientsList.add(extendedIngredientsJSONArray.getJSONObject(i).getString("originalString").toString())
+                ingredientsString += extendedIngredientsJSONArray.getJSONObject(i).getString("originalString").toString() + "\n"
+            }
+        }
+
+        ingredientsTextView.text = ingredientsString
 
         recipeSummaryTextView.text =
                 "Link: " + resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("sourceUrl").toString()  +
