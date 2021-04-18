@@ -103,7 +103,12 @@ class SecondFragment : Fragment() {
         analyzedInstructionsArray.let{
             for(i in 0 until analyzedInstructionsArray!!.length()){
                 for(j in 0 until analyzedInstructionsArray?.getJSONObject(i).getJSONArray("steps").length()){
-                    stepsString += "Step $numCurrentNum: " + analyzedInstructionsArray?.getJSONObject(i).getJSONArray("steps").getJSONObject(j).getString("step").toString() + "\n"
+                    if(j != analyzedInstructionsArray?.getJSONObject(i).getJSONArray("steps").length() - 1){
+                        stepsString += "• Step $numCurrentNum: " + analyzedInstructionsArray?.getJSONObject(i).getJSONArray("steps").getJSONObject(j).getString("step").toString() + "\n\n"
+                    }
+                    else{
+                        stepsString += "• Step $numCurrentNum: " + analyzedInstructionsArray?.getJSONObject(i).getJSONArray("steps").getJSONObject(j).getString("step").toString() //don't add extra space for last step
+                    }
                     numCurrentNum++
                 }
 
@@ -113,7 +118,7 @@ class SecondFragment : Fragment() {
         stepsTextView.text = stepsString
 
 
-
+        //https://www.foodista.com/recipe/VHWCSR2Z/neiman-marcus-oatmeal-chocolate-chip-cookies
 
     }
 
