@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var requestQueue : RequestQueue
     var resp: JSONObject? = null
+    var alreadyHelp: Boolean = false
 
     // Display menu
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -110,12 +111,17 @@ class MainActivity : AppCompatActivity() {
                 supportFragmentManager.popBackStack()
             }
             "currentFragment" -> { // Change from current fragment to HelpFragment
-                supportFragmentManager.beginTransaction()
-                    .replace(prevFragmentId, HelpFragment.newInstance("p1", "p2"), "helpFragment")
-                    .addToBackStack("null")
-                    .commit()
+                if (!alreadyHelp) {
+                    supportFragmentManager.beginTransaction()
+                            .replace(prevFragmentId, HelpFragment.newInstance("p1", "p2"), "helpFragment")
+                            .addToBackStack("null")
+                            .commit()
+
+                    alreadyHelp = true
+                }
             }
             "helpFragment" -> { // Change from HelpFragment to previous fragment
+                alreadyHelp = false
                 supportFragmentManager.popBackStack()
             }
         }
