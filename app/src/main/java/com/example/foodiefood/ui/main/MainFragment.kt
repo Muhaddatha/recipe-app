@@ -35,10 +35,15 @@ class MainFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
 
+        welcomeTextView.text = "" + String(Character.toChars(0x1F389));
         //initialize checkbox array
         checkboxes = listOf<CheckBox>(dairyCheckbox,eggCheckbox, glutenCheckbox, grainCheckbox, peanutCheckbox, seafoodCheckbox, sesameCheckbox, shellfishCheckbox,
         soyCheckbox, sulfiteCheckbox, treeNutCheckbox, wheatCheckbox)
 
+        welcomeTextView.text =  String(Character.toChars(0x1F959)) + String(Character.toChars(0x1F372)) +
+                String(Character.toChars(0x1F371)) + String(Character.toChars(0x1F35B)) + String(Character.toChars(0x1F35C)) +
+                "\n\nWelcome to Foodie Food!\n\n" + String(Character.toChars(0x1F370)) + String(Character.toChars(0x1F967)) +
+                String(Character.toChars(0x1F375)) + String(Character.toChars(0x1F9C1)) + String(Character.toChars(0x1F36A))
 
         searchButton.setOnClickListener {
             handleGetRecipe(it)

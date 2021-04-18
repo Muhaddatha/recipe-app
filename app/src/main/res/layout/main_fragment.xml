@@ -14,9 +14,9 @@
         android:gravity="center"
         android:paddingTop="20sp"
         android:paddingBottom="24sp"
-        android:text="Welcome to Foodie Food!"
+        android:text="@string/welcome_to_foodie_food"
         android:textColor="@color/black"
-        android:textSize="24sp"
+        android:textSize="22sp"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="35dp" />
 
@@ -24,7 +24,7 @@
         android:id="@+id/spinnerTable"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50sp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcomeTextView">
@@ -98,7 +98,8 @@
         <TableLayout
             android:id="@+id/tableLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingLeft="15sp">
 
             <TableRow
                 android:layout_width="match_parent"
