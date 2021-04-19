@@ -25,6 +25,7 @@ class HelpFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        // Text on help page
         helpTextView.text = "Welcome to Foodie Food! The app for food enthusiasts everywhere to find their next exciting recipe to try based on their preferences!\n" +
                 "\n" +
                 "The process is simple. Select an option from each of the drop-down menus for diet, cuisine, and meal type (or leave the default option if you have no preference). And then click \"Search\"!\n" +
@@ -35,6 +36,7 @@ class HelpFragment : Fragment() {
                 "\n" +
                 "Contributors: Muhaddatha Abdulghani and Melissa Paul\n"
 
+        // On click listener to go to the previous fragment
         goButton2.setOnClickListener {
             handleGoBack2(it)
         }
@@ -76,6 +78,7 @@ class HelpFragment : Fragment() {
             }
     }
 
+    // Handler for go back onClick
     private fun handleGoBack2(view: View) {
         (activity as MainActivity).changeFragment(id, "helpFragment")
     }
