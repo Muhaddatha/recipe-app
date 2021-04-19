@@ -8,8 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.CheckBox
-import android.widget.Toast
 import com.example.foodiefood.MainActivity
 import com.example.foodiefood.R
 import kotlinx.android.synthetic.main.main_fragment.*
@@ -24,8 +22,6 @@ class MainFragment : Fragment() {
         fun newInstance() = MainFragment()
     }
 
-    private lateinit var viewModel: MainViewModel
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.main_fragment, container, false)
@@ -33,15 +29,12 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-
 
         //setting the welcome message displayed to users
         welcomeTextView.text =  String(Character.toChars(0x1F959)) + String(Character.toChars(0x1F372)) +
                 String(Character.toChars(0x1F371)) + String(Character.toChars(0x1F35B)) + String(Character.toChars(0x1F35C)) +
                 "\n\nWelcome to Foodie Food!\n\n" + String(Character.toChars(0x1F370)) + String(Character.toChars(0x1F967)) +
                 String(Character.toChars(0x1F375)) + String(Character.toChars(0x1F9C1)) + String(Character.toChars(0x1F36A))
-
 
         // setting up spinner options
         //diet options dropdown menu
@@ -72,7 +65,7 @@ class MainFragment : Fragment() {
 
     }
 
-    //This function creats the API Url and calls the apiCall method defined in MainActivity
+    //This function creates the API Url and calls the apiCall method defined in MainActivity
     private fun handleGetRecipe(view : View){
         tagOptions = ""
         Log.i("test", "inside handleGetRecipe function in main fragment")
