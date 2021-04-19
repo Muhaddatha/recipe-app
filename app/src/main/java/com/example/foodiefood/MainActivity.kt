@@ -14,7 +14,6 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONException
 import org.json.JSONObject
-import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity() {
 
@@ -44,13 +43,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
-        if (savedInstanceState == null) { // Moved fragment replacement to occur after API call
+        if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, MainFragment.newInstance(), "mainFragment")
                 .commitNow()
-            Log.i("test", "Replace with initial fragment in MainActivity")
+            Log.i("test", "Replace with initial container in MainActivity")
         }
-
     }
 
     //function that calls the Spoonacular API
@@ -60,7 +58,6 @@ class MainActivity : AppCompatActivity() {
 
         //api url
         var url = urlString
-
 
         //create object request
         val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, url, null,
@@ -105,14 +102,10 @@ class MainActivity : AppCompatActivity() {
                     .commit()
             }
             "secondFragment" -> { // Change from SecondFragment to MainFragment
-//                supportFragmentManager.beginTransaction()
-//                    .replace(prevFragmentId, MainFragment.newInstance(), "mainFragment")
-//                    .addToBackStack("null")
-//                    .commit()
                 supportFragmentManager.popBackStack()
             }
             "currentFragment" -> { // Change from current fragment to HelpFragment
-                if (!alreadyHelp) {
+                if (!alreadyHelp) { // Already on Help Fragment, so don't create new instance on top
                     supportFragmentManager.beginTransaction()
                             .replace(prevFragmentId, HelpFragment.newInstance("p1", "p2"), "helpFragment")
                             .addToBackStack("null")
@@ -122,7 +115,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             "helpFragment" -> { // Change from HelpFragment to previous fragment
-                alreadyHelp = false
+                alreadyHelp = false // Reset boolean because leaving help fragment
                 supportFragmentManager.popBackStack()
             }
         }
