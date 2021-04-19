@@ -16,8 +16,9 @@ import kotlinx.android.synthetic.main.main_fragment.*
 
 class MainFragment : Fragment() {
 
+    //user specified tags for cuisine, meal type, and diet will be held in this string
+    //this string will be added to the API url later
     var tagOptions: String = ""
-    private lateinit var checkboxes: List<CheckBox>
 
     companion object {
         fun newInstance() = MainFragment()
@@ -35,41 +36,43 @@ class MainFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
 
-        welcomeTextView.text = "" + String(Character.toChars(0x1F389));
-        //initialize checkbox array
-        checkboxes = listOf<CheckBox>(dairyCheckbox,eggCheckbox, glutenCheckbox, grainCheckbox, peanutCheckbox, seafoodCheckbox, sesameCheckbox, shellfishCheckbox,
-        soyCheckbox, sulfiteCheckbox, treeNutCheckbox, wheatCheckbox)
-
+        //setting the welcome message displayed to users
         welcomeTextView.text =  String(Character.toChars(0x1F959)) + String(Character.toChars(0x1F372)) +
                 String(Character.toChars(0x1F371)) + String(Character.toChars(0x1F35B)) + String(Character.toChars(0x1F35C)) +
                 "\n\nWelcome to Foodie Food!\n\n" + String(Character.toChars(0x1F370)) + String(Character.toChars(0x1F967)) +
                 String(Character.toChars(0x1F375)) + String(Character.toChars(0x1F9C1)) + String(Character.toChars(0x1F36A))
 
-        searchButton.setOnClickListener {
-            handleGetRecipe(it)
-        }
 
         // setting up spinner options
+        //diet options dropdown menu
         ArrayAdapter.createFromResource(activity!!.applicationContext, R.array.dietOptions, android.R.layout.simple_spinner_item).also {
             adapter->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
             dietSpinner.adapter = adapter
         }
 
+        //cuisine options dropdown menu
         ArrayAdapter.createFromResource(activity!!.applicationContext, R.array.cuisineOptions, android.R.layout.simple_spinner_item).also{
             adapter->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
             cuisineSpinner.adapter = adapter
         }
 
+        //meal type options dropdown menu
         ArrayAdapter.createFromResource(activity!!.applicationContext, R.array.mealTypeOptions, android.R.layout.simple_spinner_item).also{
             adapter->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
             mealTypeSpinner.adapter = adapter
         }
 
+        // search button onClick listener to construct API url and make a request
+        searchButton.setOnClickListener {
+            handleGetRecipe(it)
+        }
+
     }
 
+    //This function creats the API Url and calls the apiCall method defined in MainActivity
     private fun handleGetRecipe(view : View){
         tagOptions = ""
         Log.i("test", "inside handleGetRecipe function in main fragment")
@@ -108,16 +111,6 @@ class MainFragment : Fragment() {
             }
         }
 
-        for(i in 0..11){
-            if(checkboxes[i].isChecked){
-                if(tagOptions == ""){
-                    tagOptions += checkboxes[i].text.toString().toLowerCase()
-                }
-                else{
-                    tagOptions += "," + checkboxes[i].text.toString().toLowerCase()
-                }
-            }
-        }
 
     }
 

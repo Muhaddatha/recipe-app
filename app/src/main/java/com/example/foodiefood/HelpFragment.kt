@@ -27,7 +27,7 @@ class HelpFragment : Fragment() {
 
         helpTextView.text = "Welcome to Foodie Food! The app for food enthusiasts everywhere to find their next exciting recipe to try based on their preferences!\n" +
                 "\n" +
-                "The process is simple. Select an option from each of the drop-down menus for diet, cuisine, and meal type (or leave the default option if you have no preference). Next, select the checkboxes below for any intolerances you have. And then click \"Search\"!\n" +
+                "The process is simple. Select an option from each of the drop-down menus for diet, cuisine, and meal type (or leave the default option if you have no preference). And then click \"Search\"!\n" +
                 "\n" +
                 "If no recipe is available for the options you selected, a message will pop up on the screen, and you'll have to try again; otherwise, you'll be taken to a new screen that displays information about your exciting new recipe!\n" +
                 "\n" +

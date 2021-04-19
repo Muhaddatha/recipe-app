@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     var resp: JSONObject? = null
     var alreadyHelp: Boolean = false
 
-    // Display menu
+    // Display menu with help button
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    //function that calls the Spoonacular API
     fun apiCall(urlString : String, fragmentId: Int){
         //instantiate the request queue
         requestQueue = Volley.newRequestQueue(this)
@@ -91,7 +92,7 @@ class MainActivity : AppCompatActivity() {
                 Log.e("JSON Error", error.toString())
             }) // end of JSON object request
 
-        requestQueue.add(jsonObjectRequest)
+        requestQueue.add(jsonObjectRequest) //add the request to the queue
     }
 
     // Changes previous fragment with destination fragment

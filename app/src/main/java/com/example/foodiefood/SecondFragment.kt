@@ -5,8 +5,6 @@ import android.graphics.Paint
 import android.net.Uri
 import android.os.Bundle
 import android.text.Html
-import android.text.method.LinkMovementMethod
-import android.text.method.MovementMethod
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -32,7 +30,6 @@ class SecondFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var resp : JSONObject? = null
-    private lateinit var ingredientsList : ArrayList<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,19 +50,17 @@ class SecondFragment : Fragment() {
         Log.i("test", "inside onActivityCreated in second fragment")
 
         resp = (activity as MainActivity).resp
-        //recipeSummaryTextView.text = resp.toString()
 
-        //update imageview
+        //update imageview with recipe image
         var url : String? = resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("image").toString()
         Log.i("test", "imageView url: $url")
         Picasso.get().load(url).into(imageView)
 
-        backButton.setOnClickListener {
-            handleGoBack(it)
-        }
 
+        //set the text for the recipe's title
         recipeLinkButton.text = resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("title").toString()
 
+        // embed recipe url into the button with the title
         recipeLinkButton.setOnClickListener {
             var dynamicUrl = resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("sourceUrl").toString()
             val i = Intent(Intent.ACTION_VIEW)
@@ -73,14 +68,17 @@ class SecondFragment : Fragment() {
             startActivity(i)
         }
 
+        //decorate the recipe title with underline to make it look like a link
         recipeLinkButton.paintFlags = recipeLinkButton.paintFlags or Paint.UNDERLINE_TEXT_FLAG
 
+        //set the textview to show the prep time of the recipe
         timeTextView.text = resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("readyInMinutes").toString() + " minutes"
 
+        //set the textview to show the servings of the recipe
         servingsTextView.text = resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("servings").toString() + " serving(s)"
 
         var ingredientsString: String = ""
-        // get ingredients
+        // get ingredients from response
         var extendedIngredientsJSONArray : JSONArray? = resp?.getJSONArray("recipes")?.getJSONObject(0)?.getJSONArray("extendedIngredients")
         extendedIngredientsJSONArray.let{
             for(i in 0 until extendedIngredientsJSONArray!!.length()){
@@ -88,18 +86,21 @@ class SecondFragment : Fragment() {
             }
         }
 
-
-
+        //ingredients of the recipe
         ingredientsTextView.text = ingredientsString
 
+        //summary of recipe textview
         recipeSummaryTextView.text = Html.fromHtml(resp?.getJSONArray("recipes")?.getJSONObject(0)?.getString("summary").toString())
 
 
         // steps textview
         var numCurrentNum = 1
         var stepsString: String = ""
+
+        //get the instructions JSON array
         var analyzedInstructionsArray : JSONArray? = resp?.getJSONArray("recipes")?.getJSONObject(0)?.getJSONArray("analyzedInstructions")
 
+        // append each step of the instructions to a stepsstring
         analyzedInstructionsArray.let{
             for(i in 0 until analyzedInstructionsArray!!.length()){
                 for(j in 0 until analyzedInstructionsArray?.getJSONObject(i).getJSONArray("steps").length()){
@@ -115,11 +116,13 @@ class SecondFragment : Fragment() {
             }
         }
 
+        //set the steps textview to the steps string
         stepsTextView.text = stepsString
 
-
-        //https://www.foodista.com/recipe/VHWCSR2Z/neiman-marcus-oatmeal-chocolate-chip-cookies
-
+        //setting the go back button listener to allow navigation back to MainFragment
+        backButton.setOnClickListener {
+            handleGoBack(it)
+        }
     }
 
     companion object {
@@ -145,8 +148,4 @@ class SecondFragment : Fragment() {
     private fun handleGoBack(view : View){
         (activity as MainActivity).changeFragment(id, "secondFragment")
     }
-}
-
-private operator fun MovementMethod.invoke(instance: MovementMethod?) {
-
 }
