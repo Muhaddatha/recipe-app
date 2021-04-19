@@ -7,11 +7,11 @@
 
     <string-array name="dietOptions">
         <item>Diet Options</item>
-        <item>Gluten-free</item>
+        <item>Gluten free</item>
         <item>Ketogenic</item>
         <item>Vegetarian</item>
-        <item>Lacto-vegetarian</item>
-        <item>Ovo-vegetarian</item>
+        <item>Lacto vegetarian</item>
+        <item>Ovo vegetarian</item>
         <item>Vegan</item>
         <item>Pescetarian</item>
         <item>Paleo</item>
@@ -27,7 +27,7 @@
         <item>Cajun</item>
         <item>Caribbean</item>
         <item>Chinese</item>
-        <item>Eastern-European</item>
+        <item>Eastern European</item>
         <item>European</item>
         <item>French</item>
         <item>German</item>
@@ -38,10 +38,10 @@
         <item>Japanese</item>
         <item>Jewish</item>
         <item>Korean</item>
-        <item>Latin-American</item>
+        <item>Latin American</item>
         <item>Mediterranean</item>
         <item>Mexican</item>
-        <item>Middle-Eastern</item>
+        <item>Middle Eastern</item>
         <item>Nordic</item>
         <item>Southern</item>
         <item>Spanish</item>
@@ -51,8 +51,8 @@
 
     <string-array name="mealTypeOptions">
         <item>Meal Type Options</item>
-        <item>Main-course</item>
-        <item>Side-dish</item>
+        <item>Main course</item>
+        <item>Side dish</item>
         <item>Dessert</item>
         <item>Appetizer</item>
         <item>Salad</item>
