@@ -11,7 +11,7 @@
         android:id="@+id/backButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Go back"
+        android:text="@string/go_back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -33,7 +33,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#00ECECEC"
-        android:text="Button"
+        android:text="@string/button"
         android:textAllCaps="false"
         android:textColor="#4E4EFF"
         android:textSize="24sp"
@@ -71,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="TextView"
+                    android:text="@string/textview"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -81,7 +81,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="TextView"
+                    android:text="@string/textview"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
@@ -92,7 +92,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="\nSummary"
+                android:text="@string/summary"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
@@ -100,7 +100,7 @@
                 android:id="@+id/recipeSummaryTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="@string/textview"
                 android:textSize="18sp" />
 
             <TextView
@@ -108,7 +108,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="\nIngredients"
+                android:text="@string/ingredients"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
@@ -116,7 +116,7 @@
                 android:id="@+id/ingredientsTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="@string/textview"
                 android:textSize="18sp" />
 
             <TextView
@@ -124,7 +124,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Steps"
+                android:text="@string/steps"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
@@ -132,7 +132,7 @@
                 android:id="@+id/stepsTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="@string/textview"
                 android:textSize="18sp" />
 
         </LinearLayout>
