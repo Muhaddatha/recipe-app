@@ -145,6 +145,7 @@ class SecondFragment : Fragment() {
                 }
     }
 
+    // Handler for go back onClick
     private fun handleGoBack(view : View){
         (activity as MainActivity).changeFragment(id, "secondFragment")
     }
